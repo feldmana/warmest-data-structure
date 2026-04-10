@@ -1,6 +1,6 @@
 package com.warmest.service;
 
-import com.warmest.structure.WarmestDataStructure;
+import com.warmest.structure.WarmestInMemoryDataStructure;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
@@ -13,7 +13,7 @@ class WarmestServiceTest {
 
     @BeforeEach
     void setUp() {
-        WarmestDataStructure ds = new WarmestDataStructure();
+        WarmestInMemoryDataStructure ds = new WarmestInMemoryDataStructure();
         service = new WarmestService(ds);
     }
 

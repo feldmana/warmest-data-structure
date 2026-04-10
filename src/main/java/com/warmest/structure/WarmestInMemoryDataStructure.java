@@ -1,12 +1,14 @@
 package com.warmest.structure;
 
 import com.warmest.model.DoublyLinkedNode;
+import org.springframework.context.annotation.Profile;
 import org.springframework.stereotype.Component;
 
 import java.util.HashMap;
 
 @Component
-public class WarmestDataStructure implements WarmestDataStructureInterface {
+@Profile("in-memory")
+public class WarmestInMemoryDataStructure implements WarmestDataStructureInterface {
 
     private final HashMap<String, DoublyLinkedNode> map = new HashMap<>();
 

@@ -3,15 +3,25 @@ package com.warmest.structure;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
-import static org.junit.jupiter.api.Assertions.*;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertNull;
 
-class WarmestDataStructureTest {
+/**
+ * Contract test — defines the behaviour every WarmestDataStructureInterface
+ * implementation must satisfy.  Subclasses only provide the concrete instance.
+ */
+abstract class WarmestDataStructureContractTest {
 
-    private WarmestDataStructure ds;
+    protected WarmestDataStructureInterface ds;
+
+    /**
+     * Each subclass creates (and resets) its own implementation here.
+     */
+    abstract void setUp();
 
     @BeforeEach
-    void setUp() {
-        ds = new WarmestDataStructure();
+    final void init() {
+        setUp();
     }
 
     @Test
@@ -129,3 +139,4 @@ class WarmestDataStructureTest {
         assertNull(ds.remove("a"));
     }
 }
+
