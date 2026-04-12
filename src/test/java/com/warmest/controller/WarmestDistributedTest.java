@@ -76,8 +76,6 @@ class WarmestDistributedTest {
         return rt;
     }
 
-    // ── Tests ─────────────────────────────────────────────────────────────────
-
     @BeforeEach
     void cleanRedis() throws Exception {
         // cleab the shared Redis so every test starts with a blank slate
@@ -132,8 +130,6 @@ class WarmestDistributedTest {
         ResponseEntity<Integer> resp = http.getForEntity(urls.get(2) + "/key1", Integer.class);
         assertEquals(HttpStatus.NOT_FOUND, resp.getStatusCode());   // visible on :8082
     }
-
-    // ── Helper ────────────────────────────────────────────────────────────────
 
     /**
      * GET on one instance promotes that key to warmest — all instances see the change.

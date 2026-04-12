@@ -1,6 +1,5 @@
 package com.warmest.controller;
 
-import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
@@ -16,23 +15,11 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 @SpringBootTest
 @AutoConfigureMockMvc
 @ActiveProfiles("in-memory")
-@DirtiesContext(classMode = DirtiesContext.ClassMode.BEFORE_EACH_TEST_METHOD)
+@DirtiesContext(classMode = DirtiesContext.ClassMode.BEFORE_CLASS)
 class WarmestControllerIntegrationTest {
 
     @Autowired
     private MockMvc mockMvc;
-
-    @BeforeEach
-    void cleanUp() throws Exception {
-        // Remove all keys from previous tests
-        for (char c = 'a'; c <= 'z'; c++) {
-            mockMvc.perform(delete("/api/" + c));
-        }
-        // Clean up numbered keys
-        for (int i = 0; i < 100; i++) {
-            mockMvc.perform(delete("/api/key" + i));
-        }
-    }
 
     @Test
     void testRunIntegrationScenario() throws Exception {
@@ -83,10 +70,10 @@ class WarmestControllerIntegrationTest {
         mockMvc.perform(get("/api/warmest"))
                 .andExpect(status().isNoContent());
 
-        // put a, b, c
-        mockMvc.perform(put("/api/a/100")).andExpect(status().isOk());
-        mockMvc.perform(put("/api/b/200")).andExpect(status().isOk());
-        mockMvc.perform(put("/api/c/300")).andExpect(status().isOk());
+        // put a, b, c — all new keys → return empty (null)
+        mockMvc.perform(put("/api/a/100")).andExpect(status().isOk()).andExpect(content().string(""));
+        mockMvc.perform(put("/api/b/200")).andExpect(status().isOk()).andExpect(content().string(""));
+        mockMvc.perform(put("/api/c/300")).andExpect(status().isOk()).andExpect(content().string(""));
 
         // getWarmest → "c"
         mockMvc.perform(get("/api/warmest"))

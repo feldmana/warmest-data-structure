@@ -91,10 +91,8 @@ class WarmestConcurrentTest {
         assertTrue(errors.isEmpty(), "Errors: " + errors);
     }
 
-
     @Test
     void testShouldNotCorruptDataWhenSameKeyRaceCondition() throws Exception {
-
         int threadCount = 10;
         String key = "race_key";
 
@@ -144,7 +142,6 @@ class WarmestConcurrentTest {
 
     @Test
     void testShouldRemainValidWhenConcurrentUpdates() throws Exception {
-
         ExecutorService executor = Executors.newFixedThreadPool(5);
         CountDownLatch startLatch = new CountDownLatch(1);
         CountDownLatch doneLatch = new CountDownLatch(5);
@@ -183,7 +180,6 @@ class WarmestConcurrentTest {
 
     @Test
     void testShouldNotLoseDataWhenConcurrentPuts() throws Exception {
-
         int threads = 5;
         int ops = 20;
 
